@@ -2,7 +2,7 @@
 
 Code examples for [Torify](https://torify.dev) — Japanese locale APIs for AI agents.
 
-31 endpoints for wareki (era dates), invoice validation, corporate lookup, address normalization, and more.
+33 endpoints for wareki (era dates), invoice validation, corporate lookup, address normalization, bank/branch search (full Zengin database), and more.
 
 [![torify.dev](https://img.shields.io/badge/API-torify.dev-60a5fa)](https://torify.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -126,6 +126,39 @@ curl "https://torify.dev/v1/address/normalize" \
 # { "ok": true, "data": { "prefecture": "東京都", "city": "千代田区", "town": "霞が関", "block": "3丁目1番1号" } }
 ```
 
+### Bank lookup, search, and list (full Zengin database, 1,150+ banks)
+
+```bash
+# Look up by bank code + branch code
+curl "https://torify.dev/v1/bank/lookup?bankCode=0001&branchCode=001" \
+  -H "X-API-Key: $TORIFY_API_KEY"
+# { "ok": true, "data": { "bankName": "みずほ銀行", "bankNameEn": "Mizuho Bank",
+#                          "branchName": "東京営業部", "found": true, "branchFound": true } }
+
+# Search banks by partial name (kanji / kana / romaji)
+curl "https://torify.dev/v1/bank/search" --get --data-urlencode "name=みずほ" \
+  -H "X-API-Key: $TORIFY_API_KEY"
+# { "ok": true, "data": { "mode": "bank", "hits": [...], "total": 2 } }
+
+# Search branches within a specific bank
+curl "https://torify.dev/v1/bank/search?bankCode=0001" --get --data-urlencode "name=東京" \
+  -H "X-API-Key: $TORIFY_API_KEY"
+# { "ok": true, "data": { "mode": "branch", "hits": [...] } }
+
+# Paginated full bank list
+curl "https://torify.dev/v1/bank/list?limit=5" \
+  -H "X-API-Key: $TORIFY_API_KEY"
+# { "ok": true, "data": { "total": 1152, "banks": [...] } }
+```
+
+### Bank transfer validation (Zengin format)
+
+```bash
+curl "https://torify.dev/v1/bank/transfer/validate?bankCode=0001&branchCode=001&accountType=1&accountNumber=1234567" \
+  -H "X-API-Key: $TORIFY_API_KEY"
+# { "ok": true, "data": { "valid": true, "accountTypeName": "普通", "isYucho": false } }
+```
+
 ---
 
 ## TypeScript with x402 (autonomous payment)
@@ -179,7 +212,7 @@ Full docs: [torify.dev/docs](https://torify.dev/docs)
 | Corporate | houjin/lookup, industry/lookup |
 | Address | postal/lookup, address/normalize, region/lookup |
 | Text | name/romanize, kanji/to-kana, kana/convert, text/normalize |
-| Finance | bank/lookup, bank/transfer/validate, yucho/convert |
+| Finance | bank/lookup, bank/search, bank/list, bank/transfer/validate, yucho/convert |
 | Identity | mynumber/validate, phone/validate, passport/validate |
 
 ---
