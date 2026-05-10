@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "torify": {
+      "type": "http",
+      "url": "https://torify-mcp.torify.workers.dev"
+    }
+  }
+}
