@@ -25,8 +25,8 @@ wareki = get("/wareki/convert", {"direction": "g2w", "date": "2024-05-01"})
 print("Wareki:", wareki["data"])
 # {'era': '令和', 'eraYear': 6, 'formatted': '令和6年5月1日'}
 
-# Famous edge case: Showa 64 = Heisei 1 (same day, two eras)
-showa64 = get("/wareki/convert", {"direction": "w2g", "era": "showa", "year": 64, "month": 1, "day": 7})
+# Edge case: Showa ended Jan 7 1989, Heisei started Jan 8 1989 (different days)
+showa64 = get("/wareki/convert", {"direction": "w2g", "era": "showa", "eraYear": 64, "month": 1, "day": 7})
 print("Showa 64:", showa64["data"])
 # {'gregorian': '1989-01-07'}
 
