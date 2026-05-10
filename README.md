@@ -2,7 +2,7 @@
 
 Code examples for [Torify](https://torify.dev) — Japanese locale APIs for AI agents.
 
-33 endpoints for wareki (era dates), invoice validation, corporate lookup, address normalization, bank/branch search (full Zengin database), and more.
+36 endpoints for wareki (era dates), invoice validation, corporate lookup, address normalization, bank/branch search (full Zengin database), legal holiday (Labor Standards Act), school code, and more.
 
 [![torify.dev](https://img.shields.io/badge/API-torify.dev-60a5fa)](https://torify.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -159,6 +159,33 @@ curl "https://torify.dev/v1/bank/transfer/validate?bankCode=0001&branchCode=001&
 # { "ok": true, "data": { "valid": true, "accountTypeName": "普通", "isYucho": false } }
 ```
 
+### Legal holiday check (Labor Standards Act Art. 35)
+
+```bash
+# Standard 5-day work week (Sun = legal holiday, Sat = non-legal rest day)
+curl "https://torify.dev/v1/legal-holiday/check?date=2024-05-05&restDays=sun,sat" \
+  -H "X-API-Key: $TORIFY_API_KEY"
+# { "ok": true, "data": { "isLegalHoliday": true, "overtimePremiumRate": 0.35,
+#                          "overtimePremiumRateLegalNonHoliday": 0.25,
+#                          "legalReference": "Labor Standards Act Article 35 (労働基準法第35条)" } }
+```
+
+### MEXT school code validation (13-char)
+
+```bash
+curl "https://torify.dev/v1/school-code/validate?code=B213123456X00" \
+  -H "X-API-Key: $TORIFY_API_KEY"
+# { "ok": true, "data": { "valid": true, "schoolType": "elementary",
+#                          "establishment": "public_prefectural", "prefectureJa": "東京都" } }
+```
+
+### Self IP address (free, no auth)
+
+```bash
+curl "https://torify.dev/v1/whoami"
+# { "ok": true, "data": { "ip": "...", "country": "JP", "userAgent": "..." } }
+```
+
 ---
 
 ## TypeScript with x402 (autonomous payment)
@@ -213,6 +240,8 @@ Full docs: [torify.dev/docs](https://torify.dev/docs)
 | Address | postal/lookup, address/normalize, region/lookup |
 | Text | name/romanize, kanji/to-kana, kana/convert, text/normalize |
 | Finance | bank/lookup, bank/search, bank/list, bank/transfer/validate, yucho/convert |
+| Labor & Education | legal-holiday/check, school-code/validate |
+| Diagnostic | whoami (free) |
 | Identity | mynumber/validate, phone/validate, passport/validate |
 
 ---
