@@ -1,5 +1,5 @@
 /**
- * API Key subscription example ($99/mo — 10,000 calls, no crypto wallet needed)
+ * API Key subscription example ($49/mo — 10,000 calls, no crypto wallet needed)
  *
  * Setup:
  *   npm install
@@ -23,7 +23,7 @@ async function main() {
   // { era: '令和', eraYear: 6, formatted: '令和6年5月1日' }
 
   // Postal lookup (no API key required)
-  const postal = await fetch(`${BASE}/postal/lookup?code=1000013`).then(r => r.json());
+  const postal = await fetch(`${BASE}/postal/lookup?zipcode=1000013`).then(r => r.json());
   console.log("Postal:", postal.data);
   // { prefecture: '東京都', city: '千代田区', town: '霞が関' }
 
@@ -48,7 +48,7 @@ async function main() {
   // { result: 'とうきょうとちよだく' }
 
   // Bank code lookup
-  const bank = await get(`/bank/lookup?code=0001`);
+  const bank = await get(`/bank/lookup?bankCode=0001`);
   console.log("Bank:", bank.data);
 }
 

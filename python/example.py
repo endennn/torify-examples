@@ -32,7 +32,7 @@ print("Showa 64:", showa64["data"])
 
 # --- Postal code lookup (no API key required) ---
 
-postal = get("/postal/lookup", {"code": "1000013"})
+postal = get("/postal/lookup", {"zipcode": "1000013"})
 print("Postal:", postal["data"])
 # {'prefecture': '東京都', 'city': '千代田区', 'town': '霞が関'}
 
@@ -56,11 +56,11 @@ print(f"Address: {data['prefecture']} {data['city']} {data['town']}")
 # --- Phone validation (no API key required) ---
 
 # Tokyo: 2-digit area code 03
-phone_tokyo = get("/phone/validate", {"number": "03-1234-5678"})
+phone_tokyo = get("/phone/validate", {"phone": "03-1234-5678"})
 print("Phone (Tokyo):", phone_tokyo["data"])
 
 # Rural: 4-digit area code 0266
-phone_rural = get("/phone/validate", {"number": "0266-12-3456"})
+phone_rural = get("/phone/validate", {"phone": "0266-12-3456"})
 print("Phone (rural):", phone_rural["data"])
 
 # --- Tax calculation (no API key required) ---

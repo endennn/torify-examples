@@ -36,7 +36,7 @@ export PRIVATE_KEY="0x..."
 npx ts-node typescript/x402-example.ts
 ```
 
-### API Key subscription ($99/mo)
+### API Key subscription ($49/mo)
 
 ```bash
 export TORIFY_API_KEY="your-key"
@@ -89,7 +89,7 @@ curl "https://torify.dev/v1/houjin/lookup?number=8010401050783" \
 ### Postal code lookup
 
 ```bash
-curl "https://torify.dev/v1/postal/lookup?code=1000013"
+curl "https://torify.dev/v1/postal/lookup?zipcode=1000013"
 # { "ok": true, "data": { "prefecture": "東京都", "city": "千代田区", "town": "霞が関" } }
 ```
 
@@ -97,11 +97,11 @@ curl "https://torify.dev/v1/postal/lookup?code=1000013"
 
 ```bash
 # Tokyo (2-digit area code 03)
-curl "https://torify.dev/v1/phone/validate?number=03-1234-5678"
+curl "https://torify.dev/v1/phone/validate?phone=03-1234-5678"
 # { "ok": true, "data": { "valid": true, "type": "landline", "region": "東京" } }
 
 # Rural (4-digit area code 0266)
-curl "https://torify.dev/v1/phone/validate?number=0266-12-3456"
+curl "https://torify.dev/v1/phone/validate?phone=0266-12-3456"
 # { "ok": true, "data": { "valid": true, "type": "landline", "region": "長野" } }
 ```
 

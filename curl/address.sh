@@ -6,7 +6,7 @@ BASE="https://torify.dev/v1"
 API_KEY="${TORIFY_API_KEY:-your-api-key}"
 
 echo "=== Postal code lookup ==="
-curl -s "$BASE/postal/lookup?code=1000013" | jq .
+curl -s "$BASE/postal/lookup?zipcode=1000013" | jq .
 
 echo ""
 echo "=== Address normalization (largest-to-smallest order) ==="
@@ -21,7 +21,7 @@ curl -s "$BASE/region/lookup?prefecture=東京都" | jq .
 echo ""
 echo "=== Phone number validation (variable-length area codes) ==="
 # Tokyo: 2-digit area code (03)
-curl -s "$BASE/phone/validate?number=03-1234-5678" | jq .
+curl -s "$BASE/phone/validate?phone=03-1234-5678" | jq .
 
 # Rural: 4-digit area code (0266)
-curl -s "$BASE/phone/validate?number=0266-12-3456" | jq .
+curl -s "$BASE/phone/validate?phone=0266-12-3456" | jq .
