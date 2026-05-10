@@ -54,8 +54,8 @@ npx ts-node typescript/apikey-example.ts
 curl "https://torify.dev/v1/wareki/convert?direction=g2w&date=2024-05-01"
 # { "ok": true, "data": { "era": "令和", "eraYear": 6, "formatted": "令和6年5月1日" } }
 
-# Wareki → Gregorian (edge case: Showa 64 = Heisei 1 = same day, two eras)
-curl "https://torify.dev/v1/wareki/convert?direction=w2g&era=showa&year=64&month=1&day=7"
+# Wareki → Gregorian (edge case: Showa ended Jan 7, 1989; Heisei started Jan 8, 1989)
+curl "https://torify.dev/v1/wareki/convert?direction=w2g&era=showa&eraYear=64&month=1&day=7"
 # { "ok": true, "data": { "gregorian": "1989-01-07" } }
 ```
 
