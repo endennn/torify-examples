@@ -6,6 +6,18 @@ Code examples for [Torify](https://torify.dev) — Japanese locale APIs for AI a
 
 [![torify.dev](https://img.shields.io/badge/API-torify.dev-60a5fa)](https://torify.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Smithery](https://img.shields.io/badge/Smithery-100%2F100-purple)](https://smithery.ai/servers/endenibrk/torify)
+[![Glama](https://img.shields.io/badge/Glama-listed-blue)](https://glama.ai/mcp/servers/endennn/torify-examples)
+[![MCP.so](https://img.shields.io/badge/MCP.so-listed-green)](https://mcp.so/server/torify-%E2%80%94-japanese-locale-apis-for-ai-agents/hiroki-sonoda)
+
+## Listed on
+
+- **Anthropic Official MCP Registry** — `dev.torify/japanese-locale-mcp`
+- **Smithery** — [smithery.ai/servers/endenibrk/torify](https://smithery.ai/servers/endenibrk/torify) (100/100 quality score)
+- **Glama** — [glama.ai/mcp/servers/endennn/torify-examples](https://glama.ai/mcp/servers/endennn/torify-examples)
+- **MCP.so** — [mcp.so](https://mcp.so/server/torify-%E2%80%94-japanese-locale-apis-for-ai-agents/hiroki-sonoda)
+- **x402scan** — [x402scan.com](https://www.x402scan.com)
+- **a2aregistry.org** — registered
 
 ---
 
