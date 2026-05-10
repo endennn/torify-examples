@@ -65,7 +65,11 @@ curl "https://torify.dev/v1/wareki/convert?direction=w2g&era=showa&year=64&month
 # Format + check digit validation (no payment needed)
 curl "https://torify.dev/v1/invoice/validate?number=T8010401050783"
 # { "ok": true, "data": { "valid": true } }
+```
 
+> **Status**: NTA registry integration is pending external API approval. Coming soon.
+
+```bash
 # NTA registry lookup — is this T-number actually registered?
 curl "https://torify.dev/v1/invoice/verify?number=T8010401050783" \
   -H "X-API-Key: $TORIFY_API_KEY"
@@ -73,6 +77,8 @@ curl "https://torify.dev/v1/invoice/verify?number=T8010401050783" \
 ```
 
 ### Corporate number lookup
+
+> **Status**: Corporate number lookup is pending external API approval. Coming soon.
 
 ```bash
 curl "https://torify.dev/v1/houjin/lookup?number=8010401050783" \
