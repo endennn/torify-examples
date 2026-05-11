@@ -232,17 +232,20 @@ print(data["prefecture"], data["city"], data["town"])
 
 Full docs: [torify.dev/docs](https://torify.dev/docs)
 
+All 36 endpoints (paid $0.02/call + free MCP / whoami):
+
 | Category | Endpoints |
 |----------|-----------|
-| Era & Date | wareki/convert, holiday/check, age/calculate |
-| Legal & Tax | invoice/validate, invoice/verify, tax/calculate |
+| Era & Date | wareki/convert, holiday/check, age/calculate, legal-holiday/check |
+| Legal & Tax | invoice/validate, invoice/verify, tax/calculate, eltax/check (POST) |
 | Corporate | houjin/lookup, industry/lookup |
-| Address | postal/lookup, address/normalize, region/lookup |
-| Text | name/romanize, kanji/to-kana, kana/convert, text/normalize |
-| Finance | bank/lookup, bank/search, bank/list, bank/transfer/validate, yucho/convert |
-| Labor & Education | legal-holiday/check, school-code/validate |
-| Diagnostic | whoami (free) |
-| Identity | mynumber/validate, phone/validate, passport/validate |
+| Address | postal/lookup, address/normalize, region/lookup, coordinate/convert |
+| Text | name/romanize, name/split, name/validate, kana/convert, text/normalize, kanji/to-kana, kanji/normalize (POST) |
+| Finance | bank/lookup, bank/search, bank/list, bank/transfer/validate, yucho/convert, payment/3ds/check |
+| Identity | mynumber/validate, passport/validate, license/validate, insurance/validate, plate/validate, barcode/validate, phone/validate |
+| Education | school-code/validate |
+| Diagnostic | whoami (free, no auth required) |
+| Bulk (free) | wareki/convert/bulk, invoice/validate/bulk (60 req/min/IP) |
 
 ---
 
