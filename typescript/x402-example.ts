@@ -20,13 +20,13 @@ async function main() {
   const BASE = "https://torify.dev/v1";
 
   // Invoice registry lookup ($0.02 per call)
-  const invoiceRes = await fetch402(`${BASE}/invoice/verify?number=T8010401050783`);
+  const invoiceRes = await fetch402(`${BASE}/invoice/verify?number=T7000012050002`);
   const invoice = await invoiceRes.json();
   console.log("Invoice verify:", invoice.data);
   // { registered: true, registrantName: '国税庁', confidence: 0.99 }
 
   // Corporate number lookup ($0.02 per call)
-  const houjinRes = await fetch402(`${BASE}/houjin/lookup?number=8010401050783`);
+  const houjinRes = await fetch402(`${BASE}/houjin/lookup?number=7000012050002`);
   const houjin = await houjinRes.json();
   console.log("Corporate lookup:", houjin.data);
   // { name: '国税庁', address: '東京都千代田区...', status: 'active' }

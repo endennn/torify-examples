@@ -2,7 +2,7 @@
 
 Code examples for [Torify](https://torify.dev) — Japanese locale APIs for AI agents.
 
-36 endpoints for wareki (era dates), invoice validation, corporate lookup, address normalization, bank/branch search (full Zengin database), legal holiday (Labor Standards Act), school code, and more.
+39 endpoints for wareki (era dates), invoice validation, corporate lookup, address normalization, bank/branch search (full Zengin database — 1,152 institutions), legal holiday (Labor Standards Act), school code, and more.
 
 [![torify.dev](https://img.shields.io/badge/API-torify.dev-60a5fa)](https://torify.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -12,12 +12,13 @@ Code examples for [Torify](https://torify.dev) — Japanese locale APIs for AI a
 
 ## Listed on
 
-- **Anthropic Official MCP Registry** — `dev.torify/japanese-locale-mcp`
-- **Smithery** — [smithery.ai/servers/endenibrk/torify](https://smithery.ai/servers/endenibrk/torify) (100/100 quality score)
-- **Glama** — [glama.ai/mcp/servers/endennn/torify-examples](https://glama.ai/mcp/servers/endennn/torify-examples)
-- **MCP.so** — [mcp.so](https://mcp.so/server/torify-%E2%80%94-japanese-locale-apis-for-ai-agents/hiroki-sonoda)
-- **x402scan** — [x402scan.com](https://www.x402scan.com)
-- **a2aregistry.org** — registered
+- **x402scan** — https://www.x402scan.com
+- **Smithery** — https://smithery.ai/servers/endenibrk/torify
+- **Glama** — https://glama.ai/mcp/servers/endennn/torify-examples
+- **MCP.so** — https://mcp.so/server/torify-%E2%80%94-japanese-locale-apis-for-ai-agents/hiroki-sonoda
+- **Anthropic Official MCP Registry** — https://registry.modelcontextprotocol.io/v0.1/servers?search=dev.torify
+- **a2aregistry.org** — https://a2aregistry.org
+- **Google Search Console** — https://search.google.com/search-console
 
 ---
 
@@ -75,7 +76,7 @@ curl "https://torify.dev/v1/wareki/convert?direction=w2g&era=showa&eraYear=64&mo
 
 ```bash
 # Format + check digit validation (no payment needed)
-curl "https://torify.dev/v1/invoice/validate?number=T8010401050783"
+curl "https://torify.dev/v1/invoice/validate?number=T7000012050002"
 # { "ok": true, "data": { "valid": true } }
 ```
 
@@ -83,7 +84,7 @@ curl "https://torify.dev/v1/invoice/validate?number=T8010401050783"
 
 ```bash
 # NTA registry lookup — is this T-number actually registered?
-curl "https://torify.dev/v1/invoice/verify?number=T8010401050783" \
+curl "https://torify.dev/v1/invoice/verify?number=T7000012050002" \
   -H "X-API-Key: $TORIFY_API_KEY"
 # { "ok": true, "data": { "registered": true, "registrantName": "国税庁", "confidence": 0.99 } }
 ```
@@ -93,7 +94,7 @@ curl "https://torify.dev/v1/invoice/verify?number=T8010401050783" \
 > **Status**: Corporate number lookup is pending external API approval. Coming soon.
 
 ```bash
-curl "https://torify.dev/v1/houjin/lookup?number=8010401050783" \
+curl "https://torify.dev/v1/houjin/lookup?number=7000012050002" \
   -H "X-API-Key: $TORIFY_API_KEY"
 # { "ok": true, "data": { "name": "国税庁", "address": "東京都千代田区霞が関3丁目1番1号", "status": "active" } }
 ```
@@ -204,7 +205,7 @@ const wallet = createWalletClient({
 const fetch402 = wrapFetchWithPayment(fetch, wallet);
 
 // Agent pays $0.02 USDC automatically — no API key needed
-const res = await fetch402("https://torify.dev/v1/invoice/verify?number=T8010401050783");
+const res = await fetch402("https://torify.dev/v1/invoice/verify?number=T7000012050002");
 const { ok, data } = await res.json();
 console.log(data.registered, data.confidence); // true, 0.99
 ```
@@ -232,7 +233,7 @@ print(data["prefecture"], data["city"], data["town"])
 
 Full docs: [torify.dev/docs](https://torify.dev/docs)
 
-All 36 endpoints (paid $0.02/call + free MCP / whoami):
+All 39 endpoints (paid $0.02/call + free MCP / whoami):
 
 | Category | Endpoints |
 |----------|-----------|
@@ -240,6 +241,8 @@ All 36 endpoints (paid $0.02/call + free MCP / whoami):
 | Legal & Tax | invoice/validate, invoice/verify, tax/calculate, eltax/check (POST) |
 | Corporate | houjin/lookup, industry/lookup |
 | Address | postal/lookup, address/normalize, region/lookup, coordinate/convert |
+| Geo | geo/geocode (address → lat/lng via GSI, PDL 1.0), geo/reverse-geocode (lat/lng → municipality + town via GSI, PDL 1.0) |
+| Legal Search | law/search (Japanese law search via e-Gov API v2, 政府標準利用規約) |
 | Text | name/romanize, name/split, name/validate, kana/convert, text/normalize, kanji/to-kana, kanji/normalize (POST) |
 | Finance | bank/lookup, bank/search, bank/list, bank/transfer/validate, yucho/convert, payment/3ds/check |
 | Identity | mynumber/validate, passport/validate, license/validate, insurance/validate, plate/validate, barcode/validate, phone/validate |

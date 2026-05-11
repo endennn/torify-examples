@@ -28,7 +28,7 @@ async function main() {
   // { prefecture: '東京都', city: '千代田区', town: '霞が関' }
 
   // Invoice format validation (no API key required)
-  const validated = await fetch(`${BASE}/invoice/validate?number=T8010401050783`).then(r => r.json());
+  const validated = await fetch(`${BASE}/invoice/validate?number=T7000012050002`).then(r => r.json());
   console.log("Invoice valid:", validated.data.valid); // true
 
   // These require API key:

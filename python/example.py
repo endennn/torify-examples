@@ -38,7 +38,7 @@ print("Postal:", postal["data"])
 
 # --- Invoice validation (no API key required) ---
 
-invoice = get("/invoice/validate", {"number": "T8010401050783"})
+invoice = get("/invoice/validate", {"number": "T7000012050002"})
 print("Invoice valid:", invoice["data"]["valid"])
 # True
 

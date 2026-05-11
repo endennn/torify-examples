@@ -6,7 +6,7 @@ BASE="https://torify.dev/v1"
 API_KEY="${TORIFY_API_KEY:-your-api-key}"
 
 echo "=== Corporate number lookup (国税庁) ==="
-curl -s "$BASE/houjin/lookup?number=8010401050783" \
+curl -s "$BASE/houjin/lookup?number=7000012050002" \
   -H "X-API-Key: $API_KEY" | jq .
 
 echo ""
