@@ -1,12 +1,14 @@
 version: 2
+# サンプル用リポジトリのため、依存パッケージの自動更新 PR は抑制する。
+# 本体 torify (private repo) の依存更新と同期するタイミングで手動更新する方針。
+# Security advisory は GitHub から通知される (open-pull-requests-limit: 0 でも有効)。
 updates:
   # TypeScript / npm dependencies (examples/typescript/)
   - package-ecosystem: "npm"
     directory: "/typescript"
     schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 5
+      interval: "monthly"
+    open-pull-requests-limit: 0  # PR 自動作成停止 (security alert は維持)
     labels:
       - "dependencies"
       - "javascript"
@@ -18,9 +20,8 @@ updates:
   - package-ecosystem: "pip"
     directory: "/python"
     schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 5
+      interval: "monthly"
+    open-pull-requests-limit: 0  # PR 自動作成停止 (security alert は維持)
     labels:
       - "dependencies"
       - "python"
@@ -33,6 +34,7 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    open-pull-requests-limit: 0  # PR 自動作成停止 (security alert は維持)
     labels:
       - "dependencies"
       - "github-actions"
