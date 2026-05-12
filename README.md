@@ -2,7 +2,7 @@
 
 Code examples for [Torify](https://torify.dev) — Japanese locale APIs for AI agents.
 
-39 endpoints for wareki (era dates), invoice validation, corporate lookup, address normalization, bank/branch search (full Zengin database — 1,152 institutions), legal holiday (Labor Standards Act), school code, and more.
+40 endpoints for wareki (era dates), invoice validation, corporate lookup, address normalization, bank/branch search (full Zengin database — 1,152 institutions), legal holiday (Labor Standards Act), school code, and more.
 
 [![torify.dev](https://img.shields.io/badge/API-torify.dev-60a5fa)](https://torify.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -261,7 +261,7 @@ print(data["prefecture"], data["city"], data["town"])
 
 Full docs: [torify.dev/docs](https://torify.dev/docs)
 
-All 39 endpoints (paid $0.02/call + free MCP / whoami):
+All 40 endpoints (paid $0.02/call + free MCP / whoami):
 
 | Category | Endpoints |
 |----------|-----------|
