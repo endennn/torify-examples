@@ -22,6 +22,34 @@ Code examples for [Torify](https://torify.dev) — Japanese locale APIs for AI a
 
 ---
 
+## Pricing
+
+| Plan | Price | Limit | Auth method |
+|------|-------|-------|-------------|
+| **Free Trial** | Free | 100 calls/month | `X-Trial-Key` (email signup) |
+| **MCP** | Free | 100 req/day/IP | No auth |
+| **x402** | $0.02/call | Unlimited | `X-PAYMENT` header (USDC on Base L2) |
+| **Pro** | $49/mo | Unlimited (fair use) | `X-API-Key` |
+| **Enterprise** | $499/mo | Unlimited + SLA | `X-API-Key` |
+
+### Get a free trial key
+
+```bash
+curl -X POST https://torify.dev/v1/trial/signup \
+  -H "Content-Type: application/json" \
+  -d '{"email":"you@example.com"}'
+# { "ok": true, "data": { "trialKey": "tk_..." } }
+```
+
+Use the returned key as the `X-Trial-Key` header. Limit: 100 calls/month, resets monthly.
+
+```bash
+curl -H "X-Trial-Key: tk_..." \
+  "https://torify.dev/v1/wareki/convert?direction=g2w&date=2024-05-01"
+```
+
+---
+
 ## Quick Start
 
 ### Free tier (MCP — no wallet, no signup)
