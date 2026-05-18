@@ -2,23 +2,23 @@
 
 Code examples for [Torify](https://torify.dev) — Japanese locale APIs for AI agents.
 
-40 endpoints for wareki (era dates), invoice validation, corporate lookup, address normalization, bank/branch search (full Zengin database — 1,152 institutions), legal holiday (Labor Standards Act), school code, and more.
+39 endpoints for wareki (era dates), invoice validation, corporate lookup, address normalization, bank/branch search (full Zengin database — 1,152 institutions), legal holiday (Labor Standards Act), school code, and more.
 
 [![torify.dev](https://img.shields.io/badge/API-torify.dev-60a5fa)](https://torify.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Smithery](https://img.shields.io/badge/Smithery-100%2F100-purple)](https://smithery.ai/servers/endenibrk/torify)
-[![Glama](https://img.shields.io/badge/Glama-listed-blue)](https://glama.ai/mcp/servers/endennn/torify-examples)
 [![MCP.so](https://img.shields.io/badge/MCP.so-listed-green)](https://mcp.so/server/torify-%E2%80%94-japanese-locale-apis-for-ai-agents/hiroki-sonoda)
+[![Anthropic Registry](https://img.shields.io/badge/Anthropic_MCP_Registry-listed-orange)](https://registry.modelcontextprotocol.io/v0/servers/dev.torify/japanese-locale-mcp)
 
 ## Listed on
 
-- **x402scan** — https://www.x402scan.com
-- **Smithery** — https://smithery.ai/servers/endenibrk/torify
-- **Glama** — https://glama.ai/mcp/servers/endennn/torify-examples
+- **Smithery** — https://smithery.ai/servers/endenibrk/torify (Score 100/100)
 - **MCP.so** — https://mcp.so/server/torify-%E2%80%94-japanese-locale-apis-for-ai-agents/hiroki-sonoda
-- **Anthropic Official MCP Registry** — https://registry.modelcontextprotocol.io/v0.1/servers?search=dev.torify
+- **Anthropic Official MCP Registry** — https://registry.modelcontextprotocol.io/v0/servers/dev.torify/japanese-locale-mcp
+- **Cursor MCP Directory** — https://cursor.directory/mcp _(Pending review)_
+- **Cline MCP Marketplace** — https://github.com/cline/mcp-marketplace/issues/1603 _(Issue #1603 · Pending review)_
+- **x402scan** — https://www.x402scan.com
 - **a2aregistry.org** — https://a2aregistry.org
-- **Google Search Console** — https://search.google.com/search-console
 
 ---
 
@@ -29,8 +29,8 @@ Code examples for [Torify](https://torify.dev) — Japanese locale APIs for AI a
 | **Free Trial** | Free | 100 calls/month | `X-Trial-Key` (email signup) |
 | **MCP** | Free | 100 req/day/IP | No auth |
 | **x402** | $0.02/call | Unlimited | `X-PAYMENT` header (USDC on Base L2) |
-| **Pro** | $49/mo | Unlimited (fair use) | `X-API-Key` |
-| **Enterprise** | $499/mo | Unlimited + SLA | `X-API-Key` |
+| **Pro** | $49/mo | 10,000 calls/month | `X-API-Key` |
+| **Enterprise** | $499/mo | 1,000,000 calls/month (Fair Use) | `X-API-Key` + priority support + SLA |
 
 ### Get a free trial key
 
@@ -77,7 +77,12 @@ export PRIVATE_KEY="0x..."
 npx ts-node typescript/x402-example.ts
 ```
 
-### API Key subscription ($49/mo)
+### API Key subscription ($49/mo Pro or $499/mo Enterprise)
+
+Subscribe via Polar to receive your API key by email:
+
+- **Pro ($49/mo)**: https://buy.polar.sh/polar_cl_N7Q6P6X3TMOlv9TqaGHrbqzviFnnmSuICsTdT06N2LW
+- **Enterprise ($499/mo)**: https://buy.polar.sh/polar_cl_mWV5CA7nv6rfR0aGM1H7HJjmgVLJGXBCKeHre05RvHe
 
 ```bash
 export TORIFY_API_KEY="your-key"
@@ -261,7 +266,7 @@ print(data["prefecture"], data["city"], data["town"])
 
 Full docs: [torify.dev/docs](https://torify.dev/docs)
 
-All 40 endpoints (paid $0.02/call + free MCP / whoami):
+All 39 endpoints (paid $0.02/call + free MCP / whoami):
 
 | Category | Endpoints |
 |----------|-----------|
@@ -271,9 +276,9 @@ All 40 endpoints (paid $0.02/call + free MCP / whoami):
 | Address | postal/lookup, address/normalize, region/lookup, coordinate/convert |
 | Geo | geo/geocode (address → lat/lng via GSI, PDL 1.0), geo/reverse-geocode (lat/lng → municipality + town via GSI, PDL 1.0) |
 | Legal Search | law/search (Japanese law search via e-Gov API v2, 政府標準利用規約) |
-| Text | name/romanize, name/split, name/validate, kana/convert, text/normalize, kanji/to-kana, kanji/normalize (POST) |
+| Text | name/romanize, name/split, name/validate, kana/convert, text/normalize, kanji/to-kana (Cloudflare Workers AI, Llama 3.3 70B), kanji/normalize (POST) |
 | Finance | bank/lookup, bank/search, bank/list, bank/transfer/validate, yucho/convert, payment/3ds/check |
-| Identity | mynumber/validate, passport/validate, license/validate, insurance/validate, plate/validate, barcode/validate, phone/validate |
+| Identity | mynumber/validate, passport/validate, insurance/validate, plate/validate, barcode/validate, phone/validate |
 | Education | school-code/validate |
 | Diagnostic | whoami (free, no auth required) |
 | Bulk (free) | wareki/convert/bulk, invoice/validate/bulk (60 req/min/IP) |
@@ -283,3 +288,7 @@ All 40 endpoints (paid $0.02/call + free MCP / whoami):
 ## License
 
 MIT — examples only. The Torify API service is proprietary.
+
+---
+
+*Last updated: 2026-05-18*
