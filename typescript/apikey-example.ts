@@ -1,5 +1,5 @@
 /**
- * API Key subscription example ($49/mo — 10,000 calls, no crypto wallet needed)
+ * API Key subscription example ($49/mo Pro — 10,000 calls/month, no crypto wallet needed)
  *
  * Setup:
  *   npm install

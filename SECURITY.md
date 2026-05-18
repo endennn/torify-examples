@@ -42,7 +42,7 @@ For vulnerabilities in the **Torify API itself** (`https://torify.dev/v1/*`,
 - Issues caused by users modifying example code in unsafe ways
 - Theoretical attacks without practical impact (e.g., timing analysis without exploit)
 - Vulnerabilities in third-party services this repo references (Cloudflare,
-  LemonSqueezy, NTA, Yahoo! JLP — report to those vendors directly)
+  Polar, NTA — report to those vendors directly)
 
 ### Bug bounty
 
@@ -51,4 +51,4 @@ will be credited in release notes (with permission).
 
 ---
 
-*Last updated: 2026-05-11*
+*Last updated: 2026-05-18*
