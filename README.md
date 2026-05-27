@@ -153,11 +153,64 @@ curl "https://torify.dev/v1/phone/validate?phone=0266-12-3456"
 
 ### Address normalization
 
+#### Response Schema (v0.3.0+)
+
+```typescript
+{
+  prefecture: string | null,
+  city: string | null,
+  town: string | null,
+  streetNumber: string | null,
+  streetNumberHyphen: string | null,
+  streetNumberFormal: string | null,
+  addressType: 'block' | 'street' | 'rural' | 'other',   // NEW: first-class enum
+  streetRef: {                                            // NEW: Kyoto intersection
+    intersection: string;
+    direction: '上る' | '下る' | '東入' | '西入' | null;
+  } | null,
+  addressee: string | null,                               // NEW: 様方/気付/c/o separated
+}
+```
+
+#### Examples
+
+| Input | addressType | streetRef | addressee | Notes |
+|---|---|---|---|---|
+| 東京都千代田区霞が関3丁目1番1号 | `block` | `null` | `null` | 通常住所 |
+| 京都府京都市中京区烏丸通三条上る場之町 | `street` | `{"direction": "上る", "intersection": "烏丸通三条上る"}` | `null` | 京都通り名 |
+| 東京都港区赤坂2-3-4 山田様方 | `block` | `null` | `"山田"` | 方書 |
+| 東京都港区赤坂二丁目 | `block` | `null` | `null` | 漢数字 1-99 → Arabic 自動変換 |
+
 ```bash
+# 通常住所 (block)
 curl "https://torify.dev/v1/address/normalize" \
   --get --data-urlencode "address=東京都千代田区霞が関3丁目1番1号" \
   -H "X-API-Key: $TORIFY_API_KEY"
-# { "ok": true, "data": { "prefecture": "東京都", "city": "千代田区", "town": "霞が関", "block": "3丁目1番1号" } }
+# { "ok": true, "data": { "prefecture": "東京都", "city": "千代田区", "town": "霞が関",
+#                          "addressType": "block", "streetRef": null, "addressee": null } }
+
+# 京都通り名 (street + streetRef populated)
+curl "https://torify.dev/v1/address/normalize" \
+  --get --data-urlencode "address=京都府京都市中京区烏丸通三条上る場之町" \
+  -H "X-API-Key: $TORIFY_API_KEY"
+# { "ok": true, "data": { "prefecture": "京都府", "city": "京都市中京区",
+#                          "addressType": "street",
+#                          "streetRef": { "intersection": "烏丸通三条上る", "direction": "上る" },
+#                          "addressee": null } }
+
+# 方書 — addressee 分離
+curl "https://torify.dev/v1/address/normalize" \
+  --get --data-urlencode "address=東京都港区赤坂2-3-4 山田様方" \
+  -H "X-API-Key: $TORIFY_API_KEY"
+# { "ok": true, "data": { "prefecture": "東京都", "city": "港区", "town": "赤坂",
+#                          "addressType": "block", "streetRef": null, "addressee": "山田" } }
+
+# 漢数字 → Arabic 自動変換
+curl "https://torify.dev/v1/address/normalize" \
+  --get --data-urlencode "address=東京都港区赤坂二丁目" \
+  -H "X-API-Key: $TORIFY_API_KEY"
+# { "ok": true, "data": { "prefecture": "東京都", "city": "港区", "town": "赤坂2丁目",
+#                          "addressType": "block", "streetRef": null, "addressee": null } }
 ```
 
 ### Bank lookup, search, and list (full Zengin database, 1,150+ banks)
@@ -291,4 +344,4 @@ MIT — examples only. The Torify API service is proprietary.
 
 ---
 
-*Last updated: 2026-05-18*
+*Last updated: 2026-05-27*
