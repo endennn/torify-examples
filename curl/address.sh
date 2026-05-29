@@ -15,6 +15,23 @@ curl -s "$BASE/address/normalize" \
   -H "X-API-Key: $API_KEY" | jq .
 
 echo ""
+echo "=== Address normalization — Kyoto tori-na (通り名) example (address Phase 2.5) ==="
+# Kyoto uses a street-grid system with named tōri (通り) instead of block numbers.
+# addressType=kyoto_torichi is returned, plus streetRef (the intersection) and addressee.
+curl -s "$BASE/address/normalize" \
+  --get --data-urlencode "address=京都府京都市中京区烏丸通三条上る場之町" \
+  -H "X-API-Key: $API_KEY" | jq .
+# {
+#   "ok": true,
+#   "data": {
+#     "prefecture": "京都府", "city": "京都市", "ward": "中京区",
+#     "addressType": "kyoto_torichi",
+#     "streetRef": "烏丸通三条上る",
+#     "addressee": "場之町"
+#   }
+# }
+
+echo ""
 echo "=== Region lookup by prefecture ==="
 curl -s "$BASE/region/lookup?prefecture=東京都" | jq .
 
