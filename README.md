@@ -2,7 +2,7 @@
 
 Code examples for [Torify](https://torify.dev) — Japanese locale APIs for AI agents.
 
-39 endpoints for wareki (era dates), invoice validation, corporate lookup, address normalization, bank/branch search (full Zengin database — 1,152 institutions), legal holiday (Labor Standards Act), school code, and more.
+40 endpoints for wareki (era dates), invoice validation, corporate lookup, address normalization, bank/branch search (full Zengin database — 1,152 institutions), legal holiday (Labor Standards Act), school code, and more.
 
 [![torify.dev](https://img.shields.io/badge/API-torify.dev-60a5fa)](https://torify.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -117,9 +117,9 @@ curl "https://torify.dev/v1/invoice/validate?number=T7000012050002"
 
 ```bash
 # NTA registry lookup — is this T-number actually registered?
-curl "https://torify.dev/v1/invoice/verify?number=T7000012050002" \
+curl "https://torify.dev/v1/invoice/verify?number=T1180301018771" \
   -H "X-API-Key: $TORIFY_API_KEY"
-# { "ok": true, "data": { "registered": true, "registrantName": "国税庁", "confidence": 0.99 } }
+# { "ok": true, "data": { "registered": true, "registrantName": "トヨタ自動車株式会社", "confidence": 0.99 } }
 ```
 
 ### Corporate number lookup
@@ -238,7 +238,7 @@ const wallet = createWalletClient({
 const fetch402 = wrapFetchWithPayment(fetch, wallet);
 
 // Agent pays $0.02 USDC automatically — no API key needed
-const res = await fetch402("https://torify.dev/v1/invoice/verify?number=T7000012050002");
+const res = await fetch402("https://torify.dev/v1/invoice/verify?number=T1180301018771");
 const { ok, data } = await res.json();
 console.log(data.registered, data.confidence); // true, 0.99
 ```
@@ -266,12 +266,12 @@ print(data["prefecture"], data["city"], data["town"])
 
 Full docs: [torify.dev/docs](https://torify.dev/docs)
 
-All 39 endpoints (paid $0.02/call + free MCP / whoami):
+All 40 endpoints (paid $0.02/call + free MCP / whoami):
 
 | Category | Endpoints |
 |----------|-----------|
 | Era & Date | wareki/convert, holiday/check, age/calculate, legal-holiday/check |
-| Legal & Tax | invoice/validate, invoice/verify, tax/calculate, eltax/check (POST) |
+| Legal & Tax | invoice/validate, invoice/verify, tax/calculate, eltax/check (POST), freelance/order/validate (POST) |
 | Corporate | houjin/lookup, industry/lookup |
 | Address | postal/lookup, address/normalize, region/lookup, coordinate/convert |
 | Geo | geo/geocode (address → lat/lng via GSI, PDL 1.0), geo/reverse-geocode (lat/lng → municipality + town via GSI, PDL 1.0) |
@@ -281,7 +281,7 @@ All 39 endpoints (paid $0.02/call + free MCP / whoami):
 | Identity | mynumber/validate, passport/validate, insurance/validate, plate/validate, barcode/validate, phone/validate |
 | Education | school-code/validate |
 | Diagnostic | whoami (free, no auth required) |
-| Bulk (free) | wareki/convert/bulk, invoice/validate/bulk (60 req/min/IP) |
+| Bulk | wareki/convert/bulk, invoice/validate/bulk, invoice/verify/bulk (max 300), tax/calculate/bulk (max 1000) |
 
 ---
 

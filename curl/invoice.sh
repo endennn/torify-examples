@@ -14,8 +14,15 @@ curl -s "$BASE/invoice/validate?number=T1234567890123" | jq .
 
 echo ""
 echo "=== NTA registry lookup (requires API key) ==="
-curl -s "$BASE/invoice/verify?number=T7000012050002" \
+curl -s "$BASE/invoice/verify?number=T1180301018771" \
   -H "X-API-Key: $API_KEY" | jq .
+
+echo ""
+echo "=== Bulk NTA registry lookup — up to 300 T-numbers in one POST ==="
+curl -s -X POST "$BASE/invoice/verify/bulk" \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: $API_KEY" \
+  -d '{"numbers":["T1180301018771","T1010001067912"]}' | jq .
 
 echo ""
 echo "=== Consumption tax calculation (dual rate: 8% food / 10% standard) ==="
